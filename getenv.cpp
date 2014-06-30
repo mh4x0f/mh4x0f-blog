@@ -1,6 +1,6 @@
 /*
  * procura endereço da string na memoria usando getenv
- * 
+ * http://chmodsecurity.com.br/artigo/11/stack-overflow-na-pratica-0x04
 */
 #include <cstdlib>
 #include <cstdio>
