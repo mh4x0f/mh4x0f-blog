@@ -3,8 +3,7 @@
  * tutorial 
  * instrodução a socket em C 
  ***************************************************
-
-
+/*
 
 #include <stdio.h>
 
