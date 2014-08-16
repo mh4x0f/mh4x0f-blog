@@ -1,3 +1,5 @@
+# 32 bit 
+# article: http://chmodsecurity.com.br/artigo/22/shellcode-64-bits-assembly-linguage-developer-[asm].html
 .global _start
  .text
 _start:
