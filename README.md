@@ -1,11 +1,11 @@
-chmodsecurity POC Article
-=================================
-www.chmodsecurity.com.br
-<a>POC chmod tools create in tutorial</a>
-=================================
-Buffer overflow exemple 
-stack overflow exemple 
-low level
-intrução a desenvolvimento de exploit
-+++++++++++++++++++++++++++++++++
+==================================
+==================================
+<h5>chmodsecurity POC Article<h5>
+==================================
+==================================
+http://chmodsecurity.com.br/artigos
+POC chmod tools create in tutorial
+[==================================]
+[==================================]
+
 
